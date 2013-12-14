@@ -1,7 +1,7 @@
 //Represents your basic binary tree
 //Will allow duplicate keys
 
-function BinaryTree() {	
+function BinaryTree() { 
 	this.root = null;
 	this.count = 0;
 }
@@ -32,7 +32,7 @@ BinaryTree.prototype.Delete = function(val) {
 		isRoot = true;
 	}
    
-    if(node.left && node.right) { //Case if two children
+	if(node.left && node.right) { //Case if two children
 		var minNode = this.Min(node.right);
 		var sameNode = minNode == node.right;
 		

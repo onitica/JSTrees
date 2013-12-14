@@ -137,7 +137,7 @@ AVLTree.prototype.Find = function(val) {
 
 AVLTree.prototype.GetBalance = function(node) {
 	if(!node) return 0;
-    return this.Rank(node.left) - this.Rank(node.right);
+	return this.Rank(node.left) - this.Rank(node.right);
 }
 
 AVLTree.prototype.GetRoot = function() {
@@ -217,12 +217,12 @@ AVLTree.prototype.Insert = function(node) {
 			}
 		}
 		temp = addedNode;
-        while(temp)
-        {
+		while(temp)
+		{
 			this.UpdateRank(temp);
 			this.BalanceAtNode(temp);
 			temp = temp.parent;
-        }
+		}
 	}
 
 	this.count += 1;

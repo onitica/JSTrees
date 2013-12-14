@@ -48,17 +48,17 @@
 				var newY = node.left.level * TREE_NODE_RADIUS * 2;
 				var newX = node.left.column * TREE_NODE_RADIUS;
 				ctx.beginPath();
-			  	ctx.moveTo(x+TREE_NODE_RADIUS/2,y+TREE_NODE_RADIUS);
-			  	ctx.lineTo(newX+TREE_NODE_RADIUS/2,newY);
-			  	ctx.stroke();
+				ctx.moveTo(x+TREE_NODE_RADIUS/2,y+TREE_NODE_RADIUS);
+				ctx.lineTo(newX+TREE_NODE_RADIUS/2,newY);
+				ctx.stroke();
 			}
 			if(node.right != null) {
 				var newY = node.right.level * TREE_NODE_RADIUS * 2;
 				var newX = node.right.column * TREE_NODE_RADIUS;
 				ctx.beginPath();
-			  	ctx.moveTo(x+TREE_NODE_RADIUS/2,y+TREE_NODE_RADIUS);
-			  	ctx.lineTo(newX+TREE_NODE_RADIUS/2,newY);
-			  	ctx.stroke();
+				ctx.moveTo(x+TREE_NODE_RADIUS/2,y+TREE_NODE_RADIUS);
+				ctx.lineTo(newX+TREE_NODE_RADIUS/2,newY);
+				ctx.stroke();
 			}
 			DrawBinaryShadowNode(node.left, ctx, highlightVal);
 			DrawBinaryShadowNode(node.right,ctx, highlightVal);
@@ -104,9 +104,9 @@
 					var newY = node.children[i].level * TREE_NODE_RADIUS * 2;
 					var newX = node.children[i].column * TREE_NODE_RADIUS;
 					ctx.beginPath();
-				  	ctx.moveTo(x+TREE_NODE_RADIUS/2,y+TREE_NODE_RADIUS);
-				  	ctx.lineTo(newX+TREE_NODE_RADIUS/2,newY);
-				  	ctx.stroke();
+					ctx.moveTo(x+TREE_NODE_RADIUS/2,y+TREE_NODE_RADIUS);
+					ctx.lineTo(newX+TREE_NODE_RADIUS/2,newY);
+					ctx.stroke();
 				}
 				for(var j = 0, jcount = node.children.length; j < jcount; j++) {
 					DrawGeneralShadowNode(node.children[j], ctx, highlightVal);
@@ -120,12 +120,12 @@
 			ctx.fillStyle = "Yellow";
 			ctx.beginPath();
 			ctx.arc(x+TREE_NODE_RADIUS/2,y+TREE_NODE_RADIUS/2, TREE_NODE_RADIUS/2, 0, 2 * Math.PI, false);
-		    ctx.fill();
+			ctx.fill();
 			ctx.fillStyle = "Black";
 		}
 		ctx.beginPath();
-	    ctx.arc(x+TREE_NODE_RADIUS/2,y+TREE_NODE_RADIUS/2, TREE_NODE_RADIUS/2, 0, 2 * Math.PI, false);
-	    ctx.stroke();
+		ctx.arc(x+TREE_NODE_RADIUS/2,y+TREE_NODE_RADIUS/2, TREE_NODE_RADIUS/2, 0, 2 * Math.PI, false);
+		ctx.stroke();
 		ctx.textAlign = 'center';
 		ctx.textBaseline = 'middle';
 		ctx.fillText(node.val,x+TREE_NODE_RADIUS/2,y+TREE_NODE_RADIUS/2,TREE_NODE_RADIUS);

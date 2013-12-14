@@ -32,7 +32,7 @@ BinaryHeap.prototype.Heapify = function(index) {
 	if(leftIdx != null && (this.data[leftIdx].CompareTo(this.data[index]) > 0)) {
 		topIdx = leftIdx;
 	}
-    if(rightIdx != null && (this.data[rightIdx].CompareTo(this.data[topIdx]) > 0)) {
+	if(rightIdx != null && (this.data[rightIdx].CompareTo(this.data[topIdx]) > 0)) {
 		topIdx = rightIdx;
 	}
 	if(topIdx != index) {
@@ -44,7 +44,7 @@ BinaryHeap.prototype.Heapify = function(index) {
 }
 
 BinaryHeap.prototype.Parent = function(index) {
-	return Math.floor(index/2);	
+	return Math.floor(index/2); 
 }
 
 BinaryHeap.prototype.Insert = function(node) {

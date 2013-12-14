@@ -4,9 +4,9 @@
 		<title>Tree Manipulation</title>
 		<meta charset='utf-8'>
 		<link rel='stylesheet' href='http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css' />
-	    <link rel='stylesheet' href='css/site.css'>
-	    <script src='http://code.jquery.com/jquery-1.9.1.js'></script>
-	    <script src='http://code.jquery.com/ui/1.10.3/jquery-ui.js'></script>
+		<link rel='stylesheet' href='css/site.css'>
+		<script src='http://code.jquery.com/jquery-1.9.1.js'></script>
+		<script src='http://code.jquery.com/ui/1.10.3/jquery-ui.js'></script>
 		<script type='text/javascript' src='js/jquery.ui.menubar.js'></script>
 		<script type='text/javascript' src='js/tree.js'></script>
 		<script type='text/javascript' src='js/treerenderer.js'></script>
@@ -19,16 +19,16 @@
 			//Initialize jquery menu
 			$(function() {
 				$('#menu').menubar({
-				    autoExpand: true,
-				    menuIcon: true,
-				    buttons: true,
-				    select: function(event, ui) {
+					autoExpand: true,
+					menuIcon: true,
+					buttons: true,
+					select: function(event, ui) {
 						var ttype = ui.item.attr('tag');
 						if(typeof window[ttype] === 'function') {
 							var comparator;
 							tree = new window[ttype]();
 							
-							GenerateControls(tree);	
+							GenerateControls(tree); 
 								
 							PopulateTree();
 							RandomizeTreeAdd();
@@ -36,9 +36,9 @@
 						} else { 
 							alert('Invalid params: ' + ttype + ' ' + ui.item.text());
 						}
-		            }
+					}
 				});
-		  	});
+			});
 		
 			//Global vars
 			var tree;
@@ -91,7 +91,7 @@
 				alert(a);
 			}
 			
-		    function Insert() {
+			function Insert() {
 				var toAdd = new TreeJS.Node({ val : parseInt($('#Insert').val()) });
 				tree.Insert(toAdd);
 				RandomizeTreeAdd();
@@ -102,7 +102,7 @@
 				var top = tree.Pop();
 				if(top) {
 					$('#Insert').val(top.val);
-				    DrawTree();
+					DrawTree();
 				} else alert('The tree is empty!');
 			}
 			
@@ -125,19 +125,19 @@
 			}
 			
 			function ShuffleArray(array) {
-			    for (var i = array.length - 1; i > 0; i--) {
-			        var j = Math.floor(Math.random() * (i + 1));
-			        var temp = array[i];
-			        array[i] = array[j];
-			        array[j] = temp;
-			    }
-			    return array;
+				for (var i = array.length - 1; i > 0; i--) {
+					var j = Math.floor(Math.random() * (i + 1));
+					var temp = array[i];
+					array[i] = array[j];
+					array[j] = temp;
+				}
+				return array;
 			}
 			
 			//Add code to manipulate here
 			$(document).ready(function() {
 				canvas = document.getElementById('drawCanvas');
-			    tree = new BinaryHeap();
+				tree = new BinaryHeap();
 				PopulateTree();
 				GenerateControls(tree);
 				RandomizeTreeAdd();
@@ -151,14 +151,14 @@
 		  <li><a href='#'>Heaps</a>
 			  <ul>
 			  <li tag='BinaryHeap'><a href='#'>Binary Heap</a></li>
-		      <li tag='LeftistHeap'><a href='#'>Leftist heap</a></li>
-		    </ul>
+			  <li tag='LeftistHeap'><a href='#'>Leftist heap</a></li>
+			</ul>
 		  <li><a href='#'>Binary Trees</a>
 			  <ul>
 				<li tag='BinaryTree'><a href='#'>Binary Tree</a></li>
 				<li tag='AVLTree'><a href='#'>AVL Tree</a></li>
 				<li tag='SplayTree'><a href='#'>Splay Tree</a></li>
-		    </ul>
+			</ul>
 		  </li>
 		</ul>
 		</div>

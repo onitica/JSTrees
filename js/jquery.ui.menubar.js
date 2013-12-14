@@ -422,7 +422,7 @@ $.widget( "ui.menubar", {
 			}, this.options.position ) )
 			.removeAttr( "aria-hidden" )
 			.attr( "aria-expanded", "true" )
-			.menu( "focus", event, menu.children( ".ui-menu-item" ).first()  )
+			.menu( "focus", event, menu.children( ".ui-menu-item" ).first()	 )
 			.focus();
 
 		this.open = true;
