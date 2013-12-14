@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Tree Manipulation</title>
+		<meta charset='utf-8'>
+		<link rel='stylesheet' href='http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css' />
+	    <link rel='stylesheet' href='css/site.css'>
+	    <script src='http://code.jquery.com/jquery-1.9.1.js'></script>
+	    <script src='http://code.jquery.com/ui/1.10.3/jquery-ui.js'></script>
+		<script type='text/javascript' src='js/jquery.ui.menubar.js'></script>
+		<script type='text/javascript' src='js/tree.js'></script>
+		<script type='text/javascript' src='js/treerenderer.js'></script>
+		<script type='text/javascript' src='js/binaryheap.js'></script>
+		<script type='text/javascript' src='js/binarytree.js'></script>
+		<script type='text/javascript' src='js/leftistheap.js'></script>
+		<script type='text/javascript' src='js/avltree.js'></script>
+		<script type='text/javascript' src='js/splaytree.js'></script>
+		<script type='text/javascript'>
+			//Initialize jquery menu
+			$(function() {
+				$('#menu').menubar({
+				    autoExpand: true,
+				    menuIcon: true,
+				    buttons: true,
+				    select: function(event, ui) {
+						var ttype = ui.item.attr('tag');
+						if(typeof window[ttype] === 'function') {
+							var comparator;
+							tree = new window[ttype]();
+							
+							GenerateControls(tree);	
+								
+							PopulateTree();
+							RandomizeTreeAdd();
+							DrawTree();
+						} else { 
+							alert('Invalid params: ' + ttype + ' ' + ui.item.text());
+						}
+		            }
+				});
+		  	});
+		
+			//Global vars
+			var tree;
+			var canvas;
+			var possibleFunctions = ['Insert', 'Delete', 'Count', 'Clear', 'Find', 'Pop', 'GetSortedArray'];
+		
+			//Dynamically populate controls based on available tree functions
+			function GenerateControls(tree) {
+				var controlDiv = $('#controlDiv').empty();
+				var prototype = Object.getPrototypeOf(tree);
+				for(var i = 0, p; p = possibleFunctions[i]; i++) {
+					if(prototype[p]) {
+						if(p == 'Insert' || p == 'Delete' || p == 'Find') {
+							controlDiv.append($('<input>').attr('id', p).attr('type', 'text'));
+						}
+						controlDiv.append($('<input>').attr('type', 'button').attr('value', p).attr('onclick', p + "()"));
+					}
+				}
+			}
+			
+			function DrawTree(highlightVal) {
+				TreeJSRenderer.DrawTree(tree.GetRoot(), canvas, true, highlightVal);
+			}
+		
+			//Tree wrapper functions
+			function Clear() {
+				tree.Clear();
+				DrawTree();
+			}
+			
+			function Count() {
+				var count = tree.Count();
+				alert(count + ' nodes in the tree.');
+			}
+			
+			function Delete() {
+				tree.Delete($('#Delete').val());
+				DrawTree();
+			}
+			
+			function Find() {
+				var lookUp = tree.Find($('#Find').val());
+				if(lookUp) {
+					alert('Found node in tree!');
+				} else alert('Node not found in tree.');
+			}
+			
+			function GetSortedArray() {
+				var a = tree.GetSortedArray();
+				alert(a);
+			}
+			
+		    function Insert() {
+				var toAdd = new TreeJS.Node({ val : parseInt($('#Insert').val()) });
+				tree.Insert(toAdd);
+				RandomizeTreeAdd();
+				DrawTree(toAdd.Value());
+			}
+			
+			function Pop() {
+				var top = tree.Pop();
+				if(top) {
+					$('#Insert').val(top.val);
+				    DrawTree();
+				} else alert('The tree is empty!');
+			}
+			
+			function PopulateTree(num) {
+				if(!num) num = 10;
+				var arr = [];
+				for(var i = 0; i < num; i++) {
+					arr.push(i*10);
+				}
+				ShuffleArray(arr);
+				for(var j = 0; j < arr.length; j++) {
+					var n = new TreeJS.Node({val : arr[j]});
+					DrawTree();
+					tree.Insert(n);
+				}
+			}
+			
+			function RandomizeTreeAdd() {
+				$('#Insert').val('' + Math.floor(Math.random() * 100));
+			}
+			
+			function ShuffleArray(array) {
+			    for (var i = array.length - 1; i > 0; i--) {
+			        var j = Math.floor(Math.random() * (i + 1));
+			        var temp = array[i];
+			        array[i] = array[j];
+			        array[j] = temp;
+			    }
+			    return array;
+			}
+			
+			//Add code to manipulate here
+			$(document).ready(function() {
+				canvas = document.getElementById('drawCanvas');
+			    tree = new BinaryHeap();
+				PopulateTree();
+				GenerateControls(tree);
+				RandomizeTreeAdd();
+				DrawTree();
+			});
+		</script>
+	</head>
+	<body>
+		<div id='menuDiv'>
+		<ul id='menu'>
+		  <li><a href='#'>Heaps</a>
+			  <ul>
+			  <li tag='BinaryHeap'><a href='#'>Binary Heap</a></li>
+		      <li tag='LeftistHeap'><a href='#'>Leftist heap</a></li>
+		    </ul>
+		  <li><a href='#'>Binary Trees</a>
+			  <ul>
+				<li tag='BinaryTree'><a href='#'>Binary Tree</a></li>
+				<li tag='AVLTree'><a href='#'>AVL Tree</a></li>
+				<li tag='SplayTree'><a href='#'>Splay Tree</a></li>
+		    </ul>
+		  </li>
+		</ul>
+		</div>
+		
+		<div id="controlDiv"></div>
+		<canvas id='drawCanvas' width='2000px' height='2000px'></canvas>
+	</body>
+</html>
